@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">go-mobile</string>
 
-    <string name="title_activity_detect">Detect</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="app_name">BeaconReference</string>
+
 </resources>

@@ -1,15 +1,7 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.1'
-    }
-}
-apply plugin: 'com.android.application'
+apply plugin: 'android'
 
 repositories {
-    jcenter()
+    mavenCentral()
     flatDir {
         dirs 'libs'
     }
@@ -17,20 +9,14 @@ repositories {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "21"
 
     defaultConfig {
-        applicationId "com.go_mobile"
-        minSdkVersion 18
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 19
+        targetSdkVersion 19
     }
+
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 }
 dependencies {
@@ -39,6 +25,6 @@ dependencies {
         compile 'org.altbeacon:android-beacon-library:2+@aar'
     }
 
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:support-v4:+'
+
 }
