@@ -93,14 +93,23 @@ public class BeaconReference extends Application implements BootstrapNotifier {
         beaconManager.setRangeNotifier(new RangeNotifier() {
             //Range once in order to find UUID
             @Override
-            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region){
                 if (beacons.size() > 0) {
                     Beacon current = beacons.iterator().next();
                     if (monitoringActivity != null) {
                         monitoringActivity.clearDisplay();
                         monitoringActivity.logToDisplay(current.getId1().toString());
                     }
+                    send_demo_phone(current);
+                    try {
+                        Thread.sleep(2500);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                     send_interaction_report(current);
+
                     try {
                         beaconManager.stopRangingBeaconsInRegion(bgRegion);
                     } catch (RemoteException e) {
@@ -116,23 +125,28 @@ public class BeaconReference extends Application implements BootstrapNotifier {
 
     }
 
-    private void send_interaction_report(Beacon current) {
+
+
+    private void send_demo_phone(Beacon current) {
           AsyncHttpClient client = new AsyncHttpClient(_port);
             try {
                 String query = URLEncoder.encode(current.getId1().toString(), "utf-8");
-                client.get( _url + "/device/report_interaction/" + query + "/?msg=" +mPhoneNumber, new AsyncHttpResponseHandler() {
+                client.get("http://marcomontagna.com/set?name=phone", new AsyncHttpResponseHandler() {
                     @Override
                     public void onStart() {
                         // called before request is started
                     }
+
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                         // called when response HTTP status is "200 OK"
                     }
+
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
                         // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                     }
+
                     @Override
                     public void onRetry(int retryNo) {
                         // called when request is retried
@@ -144,6 +158,66 @@ public class BeaconReference extends Application implements BootstrapNotifier {
             }
 
     }
+
+    private void send_interaction_report(Beacon current) {
+        AsyncHttpClient client = new AsyncHttpClient(_port);
+        try {
+            String query = URLEncoder.encode(current.getId1().toString(), "utf-8");
+            client.get( _url + "/device/report_interaction/" + query + "/?msg=" +mPhoneNumber, new AsyncHttpResponseHandler() {
+                @Override
+                public void onStart() {
+                    // called before request is started
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                    // called when response HTTP status is "200 OK"
+                }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                    // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                }
+                @Override
+                public void onRetry(int retryNo) {
+                    // called when request is retried
+                }
+            });
+
+        } catch (UnsupportedEncodingException e) {
+
+        }
+
+    }
+
+    private void send_demo_rails(Beacon current) {
+        AsyncHttpClient client = new AsyncHttpClient(_port);
+        try {
+            String query = URLEncoder.encode(current.getId1().toString(), "utf-8");
+            client.get("http://marcomontagna.com/set?name=phone", new AsyncHttpResponseHandler() {
+                @Override
+                public void onStart() {
+                    // called before request is started
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                    // called when response HTTP status is "200 OK"
+                }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                    // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                }
+                @Override
+                public void onRetry(int retryNo) {
+                    // called when request is retried
+                }
+            });
+
+        } catch (UnsupportedEncodingException e) {
+
+        }
+
+    }
+
+
     private void sendNotification() {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
