@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     dependencies {
-        compile 'org.altbeacon:android-beacon-library:2+@aar'
+        compile 'org.altbeacon:android-beacon-library:2+@aar', 'com.loopj.android:android-async-http:1.4.5'
     }
 
     compile 'com.android.support:support-v4:+'

@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <application
         android:label="@string/app_name"
         android:name="BeaconReference">
@@ -23,11 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-                android:name="com.go_mobile.RangingActivity"
-                android:label="@string/app_name"
-                android:launchMode="singleInstance">
-        </activity>
+
     </application>
 
 </manifest>

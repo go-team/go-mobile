@@ -31,10 +31,6 @@ public class MonitoringActivity extends Activity  {
         logToDisplay("Application just launched" );
     }
 
-    public void onRangingClicked(View view) {
-        Intent myIntent = new Intent(this, RangingActivity.class);
-        this.startActivity(myIntent);
-    }
 
     @Override
     public void onResume() {
@@ -95,5 +91,13 @@ public class MonitoringActivity extends Activity  {
             }
         });
     }
-
+    public void clearDisplay() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                EditText editText = (EditText)MonitoringActivity.this
+                        .findViewById(R.id.monitoringText);
+                editText.setText("");
+            }
+        });
+    }
 }
